@@ -1,29 +1,11 @@
-const db = require("../config/db");
+const express = require("express");
+const router = express.Router();
 
-exports.getItems = (req, res) => {
-  res.json({
-    success: true,
-    message: "Menampilkan semua data barang"
-  });
-};
+const itemController = require("../controllers/itemController");
 
-exports.createItem = (req, res) => {
-  res.json({
-    success: true,
-    message: "Barang berhasil ditambahkan"
-  });
-};
+router.get("/", itemController.getItems);
+router.post("/", itemController.createItem);
+router.put("/:id", itemController.updateItem);
+router.delete("/:id", itemController.deleteItem);
 
-exports.updateItem = (req, res) => {
-  res.json({
-    success: true,
-    message: "Barang berhasil diperbarui"
-  });
-};
-
-exports.deleteItem = (req, res) => {
-  res.json({
-    success: true,
-    message: "Barang berhasil dihapus"
-  });
-};
+module.exports = router;
